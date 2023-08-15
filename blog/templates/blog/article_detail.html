@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ article.titulo }}{% endblock %}
+
+{% block content %}
+    <h1>{{ article.titulo }}</h1>
+    <h2>{{ article.subtitulo }}</h2>
+    <p>{{ article.cuerpo }}</p>
+    <p>Por {{ article.autor }} el {{ article.fecha }}</p>
+    <!-- Agregar imagen si es necesario -->
+{% endblock %}

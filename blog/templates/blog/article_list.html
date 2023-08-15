@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Artículos{% endblock %}
+
+{% block content %}
+    <h1>Lista de Artículos</h1>
+    <ul>
+        {% for article in articles %}
+            <li><a href="{% url 'article_detail' article.id %}">{{ article.titulo }}</a></li>
+        {% empty %}
+            <li>No hay artículos disponibles.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
