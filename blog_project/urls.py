@@ -17,11 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from blog_project.views import inicio
-
 urlpatterns = [
-    path('', inicio, name='home'),
     path('admin/', admin.site.urls),
-    path("blog/", include("blog.urls")),
-    path("perfil/", include("perfiles.urls")),
+    path('', include('blog.urls')),
+    path('accounts/', include('perfiles.urls')),
 ]

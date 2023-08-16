@@ -4,6 +4,16 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Articulo
 from .forms import ArticuloForm
 
+def home(request):
+    return render(request, 'blog/home.html')
+
+def about(request):
+    return render(request, 'blog/about.html')
+
+def article_list(request):
+    articles = Articulo.objects.all()
+    return render(request, 'blog/article_list.html', {'articles': articles})
+
 @login_required
 def create_article(request):
     if request.method == 'POST':
