@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block contenido %}
     <h2>Mi Perfil</h2>
     <p>Nombre: {{ user_profile.nombre }}</p>
     <p>Apellido: {{ user_profile.apellido }}</p>
@@ -8,4 +8,4 @@
         <img src="{{ user_profile.avatar.url }}" alt="Avatar">
     {% endif %}
     <a href="{% url 'edit_profile' %}">Editar perfil</a>
-{% endblock %}
+{% endblock contenido%}
