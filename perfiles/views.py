@@ -34,7 +34,7 @@ def login_view(request):
     return render(request, 'perfiles/login.html', {'form': form})
 
 def profile(request):
-    user_profile = request.user.profile
+    user_profile = request.user.perfil
     return render(request, 'perfiles/profile.html', {'user_profile': user_profile})
 
 def logout_view(request):
