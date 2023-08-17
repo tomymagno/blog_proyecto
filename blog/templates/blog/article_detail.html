@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block contenido %}
     <h1>{{ article.titulo }}</h1>
     <h2>{{ article.subtitulo }}</h2>
     <p>{{ article.cuerpo }}</p>
@@ -8,4 +8,4 @@
     {% if article.imagen %}
         <img src="{{ article.imagen.url }}" alt="Imagen del artículo">
     {% endif %}
-{% endblock %}
+{% endblock contenido %}
