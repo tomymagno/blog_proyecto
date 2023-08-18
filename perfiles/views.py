@@ -1,5 +1,6 @@
 # perfiles/views.py
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm, LoginForm
 from .models import Perfil
@@ -21,7 +22,8 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')  # Asegúrate de que 'home' coincida con tu URL de inicio
+
+            return redirect('home')
     else:
         form = SignupForm()
     return render(request, 'perfiles/signup.html', {'form': form})
@@ -38,9 +40,26 @@ def login_view(request):
     return render(request, 'perfiles/login.html', {'form': form})
 
 def profile(request):
-    user_profile = request.user.perfil
+    try:
+        user_profile = request.user.perfil
+    except Perfil.DoesNotExist:
+        # Si el perfil no existe para el usuario, redirige a la página de creación o edición de perfil (tendríamos que crearla)
+        # return redirect('edit_profile')
+        return redirect('home')
     return render(request, 'perfiles/profile.html', {'user_profile': user_profile})
 
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def edit_profile(request):
+    perfil = request.user.perfil  
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES, instance=perfil)
+        if form.is_valid():
+            form.save()
+            return redirect('perfiles:profile')
+    else:
+        form = PerfilForm(instance=perfil)
+    return render(request, 'perfiles/edit_profile.html', {'form': form})
