@@ -1,6 +1,6 @@
 # perfiles/views.py
-from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
+from django.contrib.auth import login, authenticate, logout
 from .forms import SignupForm, LoginForm
 from .models import Perfil
 
@@ -11,13 +11,17 @@ def signup(request):
             user = form.save()
 
             # Crear el perfil asociado al usuario recién creado
-            perfil = Perfil.objects.create(user=user, nombre=form.cleaned_data['nombre'], apellido=form.cleaned_data['apellido'])
+            perfil = Perfil.objects.create(
+                user=user,
+                nombre=form.cleaned_data['nombre'],
+                apellido=form.cleaned_data['apellido']
+            )
 
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # Asegúrate de que 'home' coincida con tu URL de inicio
     else:
         form = SignupForm()
     return render(request, 'perfiles/signup.html', {'form': form})

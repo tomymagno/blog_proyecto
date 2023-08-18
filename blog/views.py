@@ -11,8 +11,8 @@ def about(request):
     return render(request, 'blog/about.html')
 
 def article_list(request):
-    article = Articulo.objects.all()
-    return render(request, 'blog/article_list.html', {'article': article})
+    articles = Articulo.objects.all()
+    return render(request, 'blog/article_list.html', {'articles': articles})
 
 @login_required
 def create_article(request):
