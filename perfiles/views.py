@@ -44,7 +44,7 @@ def profile(request):
         user_profile = request.user.perfil
     except Perfil.DoesNotExist:
         # Si el perfil no existe para el usuario, redirige a la página de creación o edición de perfil (tendríamos que crearla)
-        return redirect('edit_profile')
+        return redirect('profile')
         # return redirect('home')
     return render(request, 'perfiles/profile.html', {'user_profile': user_profile})
 
