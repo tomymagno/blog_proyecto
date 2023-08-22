@@ -16,7 +16,7 @@ class SignupForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     pass
 
-class UserProfileForm(forms.ModelForm):
+class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['nombre', 'apellido', 'avatar']

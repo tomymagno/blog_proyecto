@@ -2,6 +2,8 @@
 from django.urls import path
 from perfiles.views import signup, login_view, profile, logout_view, edit_profile
 
+app_name = 'perfiles'
+
 urlpatterns = [
     path('signup/', signup, name='signup'),
     path('login/', login_view, name='login'),
