@@ -54,12 +54,12 @@ def logout_view(request):
 
 @login_required
 def edit_profile(request):
-    perfil = request.user.perfil  
+    perfil = request.user.perfil
     if request.method == 'POST':
         form = PerfilForm(request.POST, request.FILES, instance=perfil)
-        if form.is_valid():
-            form.save()
-            return redirect('perfiles:profile')
+    if form.is_valid():
+        form.save()
+        return redirect('profile')
     else:
         form = PerfilForm(instance=perfil)
     return render(request, 'perfiles/edit_profile.html', {'form': form})
