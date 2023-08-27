@@ -20,3 +20,8 @@ class PerfilForm(forms.ModelForm):
     class Meta:
         model = Perfil
         fields = ['nombre', 'apellido', 'avatar']
+
+class CrearPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Perfil
+        fields = ['nombre', 'apellido', 'avatar']

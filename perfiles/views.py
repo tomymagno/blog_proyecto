@@ -44,8 +44,7 @@ def profile(request):
         user_profile = request.user.perfil
     except Perfil.DoesNotExist:
         # Si el perfil no existe para el usuario, redirige a la página de creación o edición de perfil (tendríamos que crearla)
-        return redirect('profile')
-        # return redirect('home')
+        return redirect('create_profile')
     return render(request, 'perfiles/profile.html', {'user_profile': user_profile})
 
 def logout_view(request):
@@ -63,3 +62,18 @@ def edit_profile(request):
     else:
         form = PerfilForm(instance=perfil)
     return render(request, 'perfiles/edit_profile.html', {'form': form})
+
+@login_required
+def create_profile(request):
+    if request.method == 'POST':
+        form = PerfilForm(request.POST, request.FILES)
+        if form.is_valid():
+            perfil = form.save(commit=False)
+            perfil.user = request.user
+            perfil.save()
+            return redirect('profile')
+    else:
+        form = PerfilForm()
+
+    return render(request, 'perfiles/create_profile.html', {'form': form})
+
